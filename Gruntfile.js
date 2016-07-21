@@ -51,6 +51,16 @@ module.exports = function(grunt) {
         }
       },
 
+      custom: {
+        options: {
+          outputStyle: 'expanded',
+          sourcemap: false
+        },
+        files: {
+          'custom/css/materialize.css': 'sass/materialize_custom.scss',
+        }
+      },
+
       // Compile ghpages css
       gh: {
         options: {
@@ -198,6 +208,43 @@ module.exports = function(grunt) {
         ],
         // the location of the resulting JS file
         dest: 'temp/js/materialize.js'
+      },
+      custom: {
+        // the files to concatenate
+        src: [
+          "js/initial.js",
+          "js/jquery.easing.1.3.js",
+          "js/animation.js",
+          "js/velocity.min.js",
+          // "js/hammer.min.js",
+          // "js/jquery.hammer.js",
+          "js/global.js",
+          "js/collapsible.js",
+          // "js/dropdown.js",
+          // "js/leanModal.js",
+          // "js/materialbox.js",
+          // "js/parallax.js",
+          // "js/tabs.js",
+          // "js/tooltip.js",
+          // "js/waves.js",
+          // "js/toasts.js",
+          // "js/sideNav.js",
+          // "js/scrollspy.js",
+          // "js/forms.js",
+          // "js/slider.js",
+          // "js/cards.js",
+          // "js/chips.js",
+          // "js/pushpin.js",
+          // "js/buttons.js",
+          // "js/transitions.js",
+          // "js/scrollFire.js",
+          // "js/date_picker/picker.js",
+          // "js/date_picker/picker.date.js",
+          // "js/character_counter.js",
+          // "js/carousel.js",
+        ],
+        // the location of the resulting JS file
+        dest: 'custom/js/materialize.js'
       },
     },
 
@@ -599,4 +646,12 @@ module.exports = function(grunt) {
   grunt.registerTask('lint', ['removelogging:source']);
   grunt.registerTask('monitor', ["concurrent:monitor"]);
   grunt.registerTask('travis', ['jasmine']);
+
+  grunt.registerTask(
+    'custom',[
+      'lint',
+      'copy',
+      'sass:custom',
+      'concat:custom'
+    ]);
 };
